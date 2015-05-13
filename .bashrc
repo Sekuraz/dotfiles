@@ -110,11 +110,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#mkvirtualenv and others
+# mkvirtualenv and others
 if [ -f /etc/bash_completion.d/virtualenvwrapper ]; then
     source /etc/bash_completion.d/virtualenvwrapper
 fi
 
+# reattach to screen or start one if you connect via ssh
 if [ -x $( command -v screen ) ]; then
     if [ $SSH_TTY ] && [ ! $WINDOW ]; then
         SCREENLIST=`screen -ls | grep 'Attached'`
@@ -125,4 +126,9 @@ if [ -x $( command -v screen ) ]; then
             screen -U -R
         fi
     fi
+fi
+
+# update and commit for svn
+if [ -x $( command -v svn) ]; then
+    alias svnci='svn up && svn ci'
 fi
