@@ -52,6 +52,7 @@ set softtabstop=4
 set expandtab " use spaces
 set textwidth=0
 set wrapmargin=0
+set autoindent
 
 " search
 set ignorecase
@@ -72,13 +73,13 @@ set ttimeoutlen=0
 set background=dark
 
 " line and column highlights
-set cul
-set cuc
-augroup cuc
-    au!
-    au WinLeave,InsertEnter * set nocuc
-    au WinEnter,InsertLeave * set cuc
-augroup END
+" set cul
+" set cuc
+" augroup cuc
+"     au!
+"     au WinLeave,InsertEnter * set nocuc
+"     au WinEnter,InsertLeave * set cuc
+" augroup END
 
 " statusbar
 set cmdheight=2
@@ -157,8 +158,10 @@ map Y y$
 nnoremap <silent><C-C> :nohl<cr>
 
 " switch buffers
-noremap <silent><F7> :bn<cr>
-noremap <silent><F8> :bp<cr>
+inoremap <F7> <Esc>:w<cr>:bn<cr>
+inoremap <F8> <Esc>:w<cr>:bp<cr>
+nnoremap <F7> :w<cr>:bn<cr>
+nnoremap <F8> :w<cr>:bp<cr>
 
 " save with sudo
 cmap w!! w !sudo tee %
@@ -278,8 +281,8 @@ NeoBundle 'bling/vim-airline'
 " NeoBundle 'myusuf3/numbers.vim'
 
 " colorschemes
-" NeoBundleLazy 'nanotech/jellybeans.vim'
-" NeoBundleLazy 'zeis/vim-kolor'
+NeoBundleLazy 'nanotech/jellybeans.vim'
+NeoBundleLazy 'zeis/vim-kolor'
 
 NeoBundle 'yonchu/accelerated-smooth-scroll'
 NeoBundle 'thinca/vim-localrc'
@@ -341,8 +344,8 @@ noremap <silent><leader>t :Tagbar<Cr>
 " Colorscheme from bundle (needs to come after its Bundle line)
 " NeoBundleSource vim-kolor
 " colorscheme kolor
-NeoBundleSource jellybeans.vim
-colorscheme jellybeans
+" NeoBundleSource jellybeans.vim
+" colorscheme jellybeans
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -355,6 +358,9 @@ let g:airline_exclude_preview = 1
 let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
 let g:seek_enable_jumps_in_diff = 1
+
+"virtualenv
+command -nargs=1 Workon :VirtualEnvActivate <args>
 
 " Jedi
 let g:jedi#goto_assignments_command = ""
@@ -378,8 +384,3 @@ nnoremap <silent><leader>u :GundoToggle<Cr>
 " accelerated_smoothscroll
 let g:ac_smooth_scroll_enable_accelerating = 0
 "" }}}
-
-    Status API Training Shop Blog About 
-
-    © 2015 GitHub, Inc. Terms Privacy Security Contact 
-

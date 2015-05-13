@@ -1,0 +1,23 @@
+# unicode
+defutf8 on
+
+# startnachricht
+startup_message off
+
+# enable mouse scrolling
+termcapinfo xterm* ti@:te@
+
+# statusline, rough format: "hostname (load)      centered window list      time date"
+hardstatus alwayslastline "%{= dB} %H (%l) %= %{g}%-w%{+ub r}%n %t%{= g}%+w %= %{B}%D, %d. %M  %c "
+#hardstatus alwayslastline "%{-b gk}%-w%{+b kg}%50>%n %t%{-b gk}%+w%<"
+
+
+# suppress trailing blank lines when scrolling up text into the history buffer
+compacthist on
+
+vbell on
+
+shelltitle "$ |bash"
+termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+defhstatus "screen ^E (^Et) | $USER@^EH"
+
