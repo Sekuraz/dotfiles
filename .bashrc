@@ -122,7 +122,7 @@ if [ -x $( command -v screen ) ]; then
         if [ $? -eq "0" ]; then
             echo -e "Screen is already running and attached:\n ${SCREENLIST}"
         else
-            screen -X setenv DISPLAY $DISPLAY
+            # screen -X setenv DISPLAY $DISPLAY
             screen -U -R
         fi
     fi
