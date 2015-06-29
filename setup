@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find | grep -v /.git/ | cpio -pdv ~
+find | egrep -v -e '(\.git($|\/.*)|^./setup$)' | cpio -pdv ~
 
 if [ ! -d ~/.backup ] ; then
     mkdir ~/.backup;
