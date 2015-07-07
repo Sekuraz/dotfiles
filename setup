@@ -5,3 +5,12 @@ find | egrep -v -e '(\.git($|\/.*)|^./setup$)' | cpio -pdv ~
 if [ ! -d ~/.backup ] ; then
     mkdir ~/.backup;
 fi
+
+if [ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" ] ; then
+    echo 'export WFUDIR=/SCR/cchem16/wfu' >> ~/.bashrc
+    echo 'export TMPDIR=/SCR/cchem16/run' >> ~/.bashrc
+    echo 'PATH=${PATH}:/software/Molpro/molprop_2099_9_linux_x86_64_i8/bin/:/software/uebungen:/software/bin' >> ~/.bashrc
+    echo 'export PATH' >> ~/.bashrc
+    echo 'export MOLPRO_OPTIONS=--no-xml-output' >> ~/.bashrc
+fi
+
