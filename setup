@@ -6,11 +6,22 @@ if [ ! -d ~/.backup ] ; then
     mkdir ~/.backup;
 fi
 
-if [ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" ] ; then
-    echo 'export WFUDIR=/SCR/cchem16/wfu' >> ~/.bashrc
-    echo 'export TMPDIR=/SCR/cchem16/run' >> ~/.bashrc
-    echo 'PATH=${PATH}:/software/Molpro/molprop_2099_9_linux_x86_64_i8/bin/:/software/uebungen:/software/bin' >> ~/.bashrc
-    echo 'export PATH' >> ~/.bashrc
-    echo 'export MOLPRO_OPTIONS=--no-xml-output' >> ~/.bashrc
+if [[ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" ]] ; then
+    (
+        echo 'export WFUDIR=/SCR/cchem16/wfu'
+        echo 'export TMPDIR=/SCR/cchem16/run'
+        echo 'PATH=${PATH}:/software/Molpro/molprop_2099_9_linux_x86_64_i8/bin/:/software/uebungen:/software/bin'
+        echo 'export PATH'
+        echo 'export MOLPRO_OPTIONS=--no-xml-output'
+    ) >> ~/.bashrc
 fi
 
+if [[ $(hostname -f) == *"selfnet.de"* ]] ; then
+    (
+        echo
+        echo 'Host login-2'
+        echo '    HostName login-2.server.selfnet.de'
+        echo '    IdentityFile ~/.ssh/id_rsa_selfnet'
+        echo '    User markusb'
+    ) >> ~/.ssh/config
+fi

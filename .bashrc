@@ -116,17 +116,17 @@ if [ -f /etc/bash_completion.d/virtualenvwrapper ]; then
 fi
 
 # reattach to screen or start one if you connect via ssh
-if [ -x $( command -v screen ) ]; then
-    if [ $SSH_TTY ] && [ ! $WINDOW ]; then
-        SCREENLIST=`screen -ls | grep 'Attached'`
-        if [ $? -eq "0" ]; then
-            echo -e "Screen is already running and attached:\n ${SCREENLIST}"
-        else
-            # screen -X setenv DISPLAY $DISPLAY
-            screen -U -R
-        fi
-    fi
-fi
+#if [ -x $( command -v screen ) ]; then
+#    if [ $SSH_TTY ] && [ ! $WINDOW ]; then
+#        SCREENLIST=`screen -ls | grep 'Attached'`
+#        if [ $? -eq "0" ]; then
+#            echo -e "Screen is already running and attached:\n ${SCREENLIST}"
+#        else
+#            # screen -X setenv DISPLAY $DISPLAY
+#            screen -U -R
+#        fi
+#    fi
+#fi
 
 # update and commit for svn
 if [ -x $( command -v svn) ]; then
