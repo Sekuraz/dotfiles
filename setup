@@ -6,7 +6,7 @@ if [ ! -d ~/.backup ] ; then
     mkdir ~/.backup;
 fi
 
-if [[ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" ]] ; then
+if [[ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" && $(cat ~/.bashrc) != *"cchem16"* ]] ; then
     (
         echo 'export WFUDIR=/SCR/cchem16/wfu'
         echo 'export TMPDIR=/SCR/cchem16/run'
@@ -16,7 +16,7 @@ if [[ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" ]] ; then
     ) >> ~/.bashrc
 fi
 
-if [[ $(hostname -f) == *"selfnet.de"* ]] ; then
+if [[ $(hostname -f) == *"selfnet.de"* && $(cat ~/.ssh/config) != *"login-2"* ]] ; then
     (
         echo
         echo 'Host login-2'
