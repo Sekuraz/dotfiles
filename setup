@@ -8,6 +8,7 @@ fi
 
 if [[ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" && $(cat ~/.bashrc) != *"cchem16"* ]] ; then
     (
+        echo
         echo 'export WFUDIR=/SCR/cchem16/wfu'
         echo 'export TMPDIR=/SCR/cchem16/run'
         echo 'PATH=${PATH}:/software/Molpro/molprop_2099_9_linux_x86_64_i8/bin/:/software/uebungen:/software/bin'
@@ -24,4 +25,12 @@ if [[ $(hostname -f) == *"selfnet.de"* && $(cat ~/.ssh/config) != *"login-2"* ]]
         echo '    IdentityFile ~/.ssh/id_rsa_selfnet'
         echo '    User markusb'
     ) >> ~/.ssh/config
+fi
+
+if [[ $(hostname -f) == *"informatik.uni-stuttgart.de"* && $(cat ~/.bashrc) != *"alglib"* ]] ; then
+    (
+        echo
+        echo 'export LD_LIBRARY_PATH="/home/baurms/sgpp/trunk/lib/sgpp:/home/baurms/sgpp/trunk/lib/alglib"'
+        echo 'export PYTHONPATH="/home/baurms/sgpp/trunk/lib/pysgpp"'
+    ) >> ~/.bashrc
 fi
