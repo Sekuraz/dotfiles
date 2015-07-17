@@ -29,6 +29,12 @@ fi
 
 if [[ $(hostname -f) == *"informatik.uni-stuttgart.de"* && $(cat ~/.bashrc) != *"alglib"* ]] ; then
     (
+        echo 'if [ -f /usr/local.nfs/Modules/init/`basename $SHELL` ]; then'
+        echo '    source /usr/local.nfs/Modules/init/`basename $SHELL`'
+        echo '    if [ -f /usr/local.nfs/Modules/modulefiles/jdk-1.8-x64 ]; then'
+        echo '        module load jdk-1.8-x64'
+        echo '    fi'
+        echo 'fi'
         echo
         echo 'export LD_LIBRARY_PATH="/home/baurms/sgpp/trunk/lib/sgpp:/home/baurms/sgpp/trunk/lib/alglib"'
         echo 'export PYTHONPATH="/home/baurms/sgpp/trunk/lib/pysgpp"'
