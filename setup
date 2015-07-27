@@ -20,10 +20,13 @@ fi
 if [[ $(hostname -f) == *"selfnet.de"* && $(cat ~/.ssh/config) != *"login-2"* ]] ; then
     (
         echo
+        echo 'Host login-1'
+        echo '    HostName login-1.server.selfnet.de'
+        echo '    IdentityFile ~/.ssh/id_rsa_selfnet'
+        echo
         echo 'Host login-2'
         echo '    HostName login-2.server.selfnet.de'
         echo '    IdentityFile ~/.ssh/id_rsa_selfnet'
-        echo '    User markusb'
     ) >> ~/.ssh/config
 fi
 
