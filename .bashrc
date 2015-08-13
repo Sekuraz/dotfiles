@@ -16,6 +16,7 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+
 HISTSIZE=1000
 HISTFILESIZE=2000
 
@@ -116,7 +117,7 @@ if [ -f /etc/bash_completion.d/virtualenvwrapper ]; then
 fi
 
 # reattach to screen or start one if you connect via ssh
-if [ -x $( command -v screen ) && $(hostname) != *"login"*  ]; then
+if [ -x $( command -v screen ) ] && [ $(hostname) != *"login"* ]; then
     if [ $SSH_TTY ] && [ ! $WINDOW ]; then
         SCREENLIST=`screen -ls | grep 'Attached'`
         if [ $? -eq "0" ]; then
