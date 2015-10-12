@@ -43,7 +43,7 @@ if [[ $(hostname -f) == *"informatik.uni-stuttgart.de"* && $(cat ~/.bashrc) != *
         echo '    fi'
         echo 'fi'
         echo
-        echo 'export LD_LIBRARY_PATH="/home/baurms/sgpp/trunk/lib/sgpp:/home/baurms/sgpp/trunk/lib/alglib"'
-        echo 'export PYTHONPATH="/home/baurms/sgpp/trunk/lib/pysgpp"'
+        echo 'export LD_LIBRARY_PATH="/home/baurms/Code/SGpp/lib/sgpp:/home/baurms/Code/SGpp/lib/alglib"'
+        echo 'export PYTHONPATH="/home/baurms/Code/SGpp/lib/pysgpp"'
     ) >> ~/.bashrc
 fi
