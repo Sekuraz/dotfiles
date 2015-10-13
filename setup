@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cd "$( dirname "${BASH_SOURCE[0]}" )"
+pwd
+
 find | egrep -v -e '(\.git($|\/.*)|^./setup$)' | cpio -pdv ~
 
 if [ ! -d ~/.backup ] ; then
@@ -43,7 +46,7 @@ if [[ $(hostname -f) == *"informatik.uni-stuttgart.de"* && $(cat ~/.bashrc) != *
         echo '    fi'
         echo 'fi'
         echo
-        echo 'export LD_LIBRARY_PATH="/home/baurms/Code/SGpp/lib/sgpp:/home/baurms/Code/SGpp/lib/alglib"'
-        echo 'export PYTHONPATH="/home/baurms/Code/SGpp/lib/pysgpp"'
+        echo 'export LD_LIBRARY_PATH=/home/baurms/Code/SGpp/lib/sgpp:$LD_LIBRARY_PATH'
+        echo 'export PYTHONPATH=/home/baurms/Code/SGpp/lib:$PYTHONPATH'
     ) >> ~/.bashrc
 fi
