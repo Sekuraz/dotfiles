@@ -20,20 +20,6 @@ if [[ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" && $(cat ~/.bashrc) !
     ) >> ~/.bashrc
 fi
 
-if [[ ( $(hostname -f) == *"selfnet.de"* || $(hostname -f) == *"markus"* ) && $(cat ~/.ssh/config) != *"login-2"* ]] ; then
-    (
-        echo
-        echo 'Host login-1'
-        echo '    HostName login-1.server.selfnet.de'
-        echo '    IdentityFile ~/.ssh/id_rsa_selfnet'
-        echo '    User markusb'
-        echo
-        echo 'Host login-2'
-        echo '    HostName login-2.server.selfnet.de'
-        echo '    IdentityFile ~/.ssh/id_rsa_selfnet'
-        echo '    User markusb'
-    ) >> ~/.ssh/config
-fi
 if [[ $(hostname -f) == *"informatik.uni-stuttgart.de"* && $(cat ~/.bashrc) != *"alglib"* ]] ; then
     (
         echo 'if [ -f /usr/local.nfs/Modules/init/`basename $SHELL` ]; then'
