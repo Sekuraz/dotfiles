@@ -158,10 +158,10 @@ map Y y$
 nnoremap <silent><C-C> :nohl<cr>
 
 " switch buffers
-inoremap <F7> <Esc>:w<cr>:bn<cr>
-inoremap <F8> <Esc>:w<cr>:bp<cr>
-nnoremap <F7> :w<cr>:bn<cr>
-nnoremap <F8> :w<cr>:bp<cr>
+inoremap <F7> <Esc>:w<cr>:bp<cr>
+inoremap <F8> <Esc>:w<cr>:bn<cr>
+nnoremap <F7> :w<cr>:bp<cr>
+nnoremap <F8> :w<cr>:bn<cr>
 
 " save with sudo
 cmap w!! w !sudo tee %
