@@ -134,3 +134,6 @@ if [ -x $( command -v svn) ]; then
     alias svnci='svn up && svn ci'
 fi
 
+if [ -x $( command -v docker) ]; then
+    alias bot='docker run -it -w /root/Code/EarthLost -v /home/markus/Code/DockerLost:/root/Code/ earthlost python'
+fi
