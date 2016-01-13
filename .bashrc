@@ -117,7 +117,7 @@ if [ -f /etc/bash_completion.d/virtualenvwrapper ]; then
 fi
 
 # reattach to screen or start one if you connect via ssh
-if [ -x $( command -v screen ) ] && [[ $(hostname) != *"login"* ]]; then
+if [ $( command -v screen ) ] && [[ $(hostname) != *"login"* ]]; then
     if [ $SSH_TTY ] && [ ! $WINDOW ]; then
         SCREENLIST=`screen -ls | grep 'Attached'`
         if [ $? -eq "0" ]; then
@@ -130,10 +130,10 @@ if [ -x $( command -v screen ) ] && [[ $(hostname) != *"login"* ]]; then
 fi
 
 # update and commit for svn
-if [ -x $( command -v svn) ]; then
+if [ $( command -v svn) ]; then
     alias svnci='svn up && svn ci'
 fi
 
-if [ -x $( command -v docker) ]; then
+if [ $( command -v docker) ]; then
     alias bot='docker run -it -w /root/Code/EarthLost -v /home/markus/Code/EarthLost:/root/Code/EarthLost sekuraz/earthlost ipython'
 fi
