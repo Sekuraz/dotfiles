@@ -12,7 +12,7 @@ scriptencoding utf-8
 syntax on
 set synmaxcol=512
 filetype indent plugin on
-runtime macros/matchit.vim
+runtime macros/matchit.vim "extended %
 
 " system
 set enc=utf-8
@@ -26,7 +26,8 @@ set hidden " change buffers without saving
 set mousehide " no mouse
 set wildmenu " menu when tab completing commands
 set nostartofline " don't move the coursor to the beginning of the line
-set foldmethod=marker " fold by marker
+set foldmethod=syntax " fold by marker
+set foldlevel=99 " do not fold on startup
 let my_scrolloff_value=16
 let &scrolloff=my_scrolloff_value " minimum lines to the screens end
 set pastetoggle=<F12> " toggle paste
@@ -48,11 +49,15 @@ set backupdir=~/.backup/
 " tabs and stuff
 set nosmartindent
 set shiftwidth=4
+set tabstop=4
 set softtabstop=4
 set expandtab " use spaces
 set textwidth=0
 set wrapmargin=0
 set autoindent
+" diff settings
+set diffopt+=iwhite
+set diffexpr=
 
 " search
 set ignorecase
@@ -65,21 +70,15 @@ set notimeout
 set ttimeout
 set ttimeoutlen=0
 
+" latex stuff
+let g:Tex_FoldedEnvironments="verbatim,comment,eq,gather,align,figure,table,thebibliography,keywords,abstract,titlepage,frame"
 
 "####################################################################
-" visual style {{{
+" visual style
 "####################################################################
 " colorscheme
 set background=dark
 
-" line and column highlights
-" set cul
-" set cuc
-" augroup cuc
-"     au!
-"     au WinLeave,InsertEnter * set nocuc
-"     au WinEnter,InsertLeave * set cuc
-" augroup END
 
 " statusbar
 set cmdheight=2
@@ -92,10 +91,9 @@ set ruler
 
 " highlight git merge markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-"" }}}
 
 "####################################################################
-" general auto commands {{{
+" general auto commands
 "####################################################################
 
 " replace man with :help when editing vimrc
@@ -104,20 +102,21 @@ au FileType vim set keywordprg=":help"
 " autoremove trailing whitespace
 au BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+" arduino syntax highlightning
+au BufRead,BufNewFile *.ino set filetype=c
+
 " grow and shrink splits with the window
 au VimResized * :wincmd =
 
-"" }}}
-
 "####################################################################
-" keymaps {{{
+" keymaps
 "####################################################################
 
 let mapleader = "\<Space>"
 
 " vp doesn't replace paste buffer
 function! RestoreRegister()
-  let @" = s:restore_reg
+  let @" =  s:restore_reg
   return ''
 endfunction
 function! s:Repl()
@@ -126,9 +125,12 @@ function! s:Repl()
 endfunction
 vmap <silent> <expr> p <sid>Repl()
 
+
 " quickfix usage
-nnoremap <leader>qp :cprev<cr>
-nnoremap <leader>qn :cnext<cr>
+nnoremap [q :cprev<cr>
+nnoremap ]q :cnext<cr>
+nnoremap {q :cpfile<cr>
+nnoremap }q :cnfile<cr>
 
 " jump to visual lines
 nnoremap j gj
@@ -154,12 +156,15 @@ nnoremap gV `[v`]
 " change Y from yy to y$
 map Y y$
 
+" alternative esc
+inoremap <C-C> <esc>
+
 " remove search hl
 nnoremap <silent><C-C> :nohl<cr>
 
 " switch buffers
-inoremap <F7> <Esc>:w<cr>:bp<cr>
-inoremap <F8> <Esc>:w<cr>:bn<cr>
+inoremap <F7> <Esc>:w<cr>:bp<cr>i
+inoremap <F8> <Esc>:w<cr>:bn<cr>i
 nnoremap <F7> :w<cr>:bp<cr>
 nnoremap <F8> :w<cr>:bn<cr>
 
@@ -173,7 +178,6 @@ nmap <silent> <C-h> :wincmd h<cr>
 nmap <silent> <C-l> :wincmd l<cr>
 
 " jump to buffer
-"nnoremap <leader><leader> <C-^>
 nnoremap <leader>1 :1b<cr>
 nnoremap <leader>2 :2b<cr>
 nnoremap <leader>3 :3b<cr>
@@ -189,13 +193,6 @@ nnoremap <leader>0 :10b<cr>
 nnoremap <leader>z :let @z=@"<cr>x$p:let @"=@z<cr>
 nnoremap <leader>m :cd %:p:h<cr>
 
-" sorting of lines (python imports)
-nnoremap <leader>s vip:!sort<cr>
-vnoremap <leader>s :!sort<cr>
-
-" align selection in columns
-vnoremap <leader>c :!column -t<cr>
-
 " show file in continuous mode
 "" open all folds
 "" disable dynamic numbers plugin
@@ -210,10 +207,9 @@ vnoremap <leader>c :!column -t<cr>
 "" reset scrolloff to whatever it was
 nnoremap <silent> <leader>cm zR:<C-u>NumbersDisable<cr>:setl nowrap<cr>:set nornu<cr>:set nu<cr>:let &scrolloff=0<cr>:bo vs<cr>Ljzt:setl scrollbind<cr><C-w>p:setl scrollbind<cr>:let &scrolloff=my_scrolloff_value<cr>
 
-"" }}}
 
 "####################################################################
-" autoinstall vundle and bundles {{{
+" autoinstall vundle and bundles
 " Credit to: https://github.com/erikzaadi
 "####################################################################
 
@@ -247,6 +243,9 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'milkypostman/vim-togglelist' "toggle quickfix list
 NeoBundle 'tomtom/tcomment_vim' "toggle comments according to ft (mapping: gc)
 
+" local config, for project specific vimrc
+NeoBundle 'thinca/vim-localrc'
+
 " movements and stuff
 NeoBundle 'tpope/vim-surround'
 " Cheatsheet for surround:
@@ -278,11 +277,11 @@ NeoBundle 'davidhalter/jedi-vim'
 
 " visual stuff
 NeoBundle 'bling/vim-airline'
-" NeoBundle 'myusuf3/numbers.vim'
+NeoBundle 'myusuf3/numbers.vim'
 
 " colorschemes
-NeoBundleLazy 'nanotech/jellybeans.vim'
-NeoBundleLazy 'zeis/vim-kolor'
+" NeoBundleLazy 'nanotech/jellybeans.vim'
+" NeoBundleLazy 'zeis/vim-kolor'
 
 NeoBundle 'yonchu/accelerated-smooth-scroll'
 NeoBundle 'thinca/vim-localrc'
@@ -295,10 +294,9 @@ au FileType sls NeoBundleSource salt-vim
 call neobundle#end()
 NeoBundleCheck
 
-"" }}}
 
 "####################################################################
-" bundle options and mappings {{{
+" bundle options and mappings
 "####################################################################
 
 " Unite.vim
@@ -308,27 +306,25 @@ let g:unite_winheight = 10
 " replace ctrl-p
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>o :<C-u>Unite -start-insert file_rec/async<cr>
-" ag
-if executable('ag')
-    let g:unite_source_grep_command='ag'
-    let g:unite_source_grep_default_opts='--nocolor --nogroup -S'
+" ack
+if executable('ack') || executable('ack-grep')
+    let g:unite_source_grep_command=executable('ack') ? 'ack' : 'ack-grep'
+    let g:unite_source_grep_default_opts='-i --nogroup --nocolor -H'
     let g:unite_source_grep_recursive_opt=''
 endif
 nnoremap <leader>/ :<C-u>Unite grep:.<cr>
-command T Unite grep:.::TODO\:\|FIXME\:\|NOTE\:<cr>
+command T Unite grep:.::TODO\:\|FIXME\:\|NOTE\:<cr
 " yankring
 let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :<C-u>Unite history/yank<cr>
 " buffer switching, very good when many buffers are open
 nnoremap <leader>s :<C-u>Unite -quick-match buffer<cr>
-" reopen unite
-nnoremap <silent><leader><leader> :<C-u>UniteResume<cr>
 
 " NERDTree
 nnoremap <silent><leader>f :NERDTreeToggle<Cr>
 let NERDTreeShowBookmarks=1
 let NERDTreeHijackNetrw=1
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.o']
+let NERDTreeIgnore=['\.pyc', '\.o', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 let NERDTreeChDirMode=0
 let NERDTreeQuitOnOpen=1
 let NERDTreeMouseMode=2
@@ -340,12 +336,15 @@ let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
 let g:tagbar_zoomwidth = 0
 noremap <silent><leader>t :Tagbar<Cr>
+noremap <silent><F9> :Tagbar<Cr>
 
 " Colorscheme from bundle (needs to come after its Bundle line)
 " NeoBundleSource vim-kolor
 " colorscheme kolor
-" NeoBundleSource jellybeans.vim
-" colorscheme jellybeans
+"NeoBundleSource jellybeans.vim
+"colorscheme jellybeans
+"NeoBundleSource wombat256.vim
+"colorscheme wombat256mod
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -381,6 +380,3 @@ noremap <silent><leader>g :GitGutterToggle<Cr>
 " Gundo
 nnoremap <silent><leader>u :GundoToggle<Cr>
 
-" accelerated_smoothscroll
-let g:ac_smooth_scroll_enable_accelerating = 0
-"" }}}
