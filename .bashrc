@@ -135,5 +135,5 @@ if [ $( command -v svn) ]; then
 fi
 
 if [ $( command -v docker) ]; then
-    alias bot='docker run -it -v /home/markus/Code/EarthLost:/EarthLost -w /EarthLost --rm --user="$( id -u $USER ):$( id -g $USER )" --env="HOME=/EarthLost/docker/dockerhome" sekuraz/earthlost ipython'
+    alias bot='docker run -it -v /home/markus/Code/EarthLost:/EarthLost -w /EarthLost --rm --net="host" --user="$( id -u $USER ):$( id -g $USER )" --env="HOME=/EarthLost/docker/dockerhome" sekuraz/earthlost ipython'
 fi
