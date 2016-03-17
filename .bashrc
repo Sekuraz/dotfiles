@@ -111,6 +111,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export EDITOR=vim
+
 # mkvirtualenv and others
 if [ -f /etc/bash_completion.d/virtualenvwrapper ]; then
     source /etc/bash_completion.d/virtualenvwrapper
