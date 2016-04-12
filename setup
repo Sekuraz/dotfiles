@@ -8,31 +8,3 @@ find | egrep -v -e '(\.git($|\/.*)|^./setup$)' | cpio -pdv ~
 if [ ! -d ~/.backup ] ; then
     mkdir ~/.backup;
 fi
-
-if [[ $(hostname -f) == "pc16.cip.chemie.uni-stuttgart.de" && $(cat ~/.bashrc) != *"cchem16"* ]] ; then
-    (
-        echo
-        echo 'export WFUDIR=/SCR/cchem16/wfu'
-        echo 'export TMPDIR=/SCR/cchem16/run'
-        echo 'PATH=${PATH}:/software/Molpro/molprop_2099_9_linux_x86_64_i8/bin/:/software/uebungen:/software/bin'
-        echo 'export PATH'
-        echo 'export MOLPRO_OPTIONS=--no-xml-output'
-    ) >> ~/.bashrc
-fi
-
-if [[ $(hostname -f) == *"informatik.uni-stuttgart.de"* && $(cat ~/.bashrc) != *"alglib"* ]] ; then
-    (
-        echo 'if [ -f /usr/local.nfs/Modules/init/`basename $SHELL` ]; then'
-        echo '    source /usr/local.nfs/Modules/init/`basename $SHELL`'
-        echo '    if [ -f /usr/local.nfs/Modules/modulefiles/jdk-1.8-x64 ]; then'
-        echo '        module load jdk-1.8-x64'
-        echo '    fi'
-        echo '    if [ -d /usr/local.nfs/sgs/modulefiles ]; then'
-        echo '        module use --append /usr/local.nfs/sgs/modulefiles'
-        echo '    fi'
-        echo 'fi'
-        echo
-        echo 'export LD_LIBRARY_PATH=/home/baurms/Code/SGpp/lib/sgpp:$LD_LIBRARY_PATH'
-        echo 'export PYTHONPATH=/home/baurms/Code/SGpp/lib:$PYTHONPATH'
-    ) >> ~/.bashrc
-fi
