@@ -142,9 +142,13 @@ fi
 
 if [[ $(hostname -f) == *"informatik"* ]]; then
     function compile {
+        current_dir=$(pwd)
+
         cd ~/Code/SGpp
         scons -j $(nproc) USE_OCL=1 SG_ALL=0 SG_BASE=1 SG_DATADRIVEN=1 SG_PDE=1 SG_SOLVER=1 SG_PYTHON=0 SG_JAVA=0 \
                 PRINT_INSTRUCTIONS=0 RUN_BOOST_TESTS=0 RUN_BOOST_PERFORMANCE_TESTS=0 DOC=0 PYDOC=0 RUN_PYTHON_TESTS=0 RUN_CPPLINT=0 "$@"
+
+        cd $current_dir
     }
 
     if [ -f /usr/local.nfs/Modules/init/`basename $SHELL` ]; then
