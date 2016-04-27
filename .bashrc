@@ -115,7 +115,13 @@ export EDITOR=vim
 
 # mkvirtualenv and others
 if [ -f /etc/bash_completion.d/virtualenvwrapper ]; then
+    export WORKON_HOME=~/.virtualenvs
     source /etc/bash_completion.d/virtualenvwrapper
+fi
+
+if [ -f /usr/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME=~/.virtualenvs
+    source /usr/bin/virtualenvwrapper.sh
 fi
 
 # reattach to screen or start one if you connect via ssh
