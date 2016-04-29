@@ -15,7 +15,7 @@ hardstatus alwayslastline "%{= dB} %H (%l) %= %{g}%-w%{+ub r}%n %t%{= g}%+w %= %
 # suppress trailing blank lines when scrolling up text into the history buffer
 compacthist on
 
-vbell on
+vbell off
 
 shelltitle "$ |bash"
 termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
