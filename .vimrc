@@ -24,6 +24,7 @@ set backspace=indent,eol,start
 " single settings
 set hidden " change buffers without saving
 set mousehide " no mouse
+set mouse=a " enable scrolling
 set wildmenu " menu when tab completing commands
 set nostartofline " don't move the coursor to the beginning of the line
 set foldmethod=syntax " fold by marker
@@ -37,17 +38,17 @@ set noswapfile " 21. century, yay
 set gdefault " substitution is global by default, specify g to reverse
 set lazyredraw " don't redraw while executing a macro
 set autoread " read changed files
-set autochdir " pwd follows files
+autocmd BufEnter * cd %:p:h " pwd follows files
 
 " persistent undo and backup
-set history=1000
+set history=10000
 set undofile
 set undodir=~/.backup/
 set backup
 set backupdir=~/.backup/
 
 " tabs and stuff
-set nosmartindent
+set smartindent
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -69,6 +70,14 @@ set incsearch
 set notimeout
 set ttimeout
 set ttimeoutlen=0
+
+" Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
+if has("autocmd")
+ augroup myvimrchooks
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc
+ augroup END
+endif
 
 " latex stuff
 let g:Tex_FoldedEnvironments="verbatim,comment,eq,gather,align,figure,table,thebibliography,keywords,abstract,titlepage,frame"
@@ -313,7 +322,7 @@ if executable('ack') || executable('ack-grep')
     let g:unite_source_grep_recursive_opt=''
 endif
 nnoremap <leader>/ :<C-u>Unite grep:.<cr>
-command T Unite grep:.::TODO\:\|FIXME\:\|NOTE\:<cr
+command! T Unite grep:.::TODO\:\|FIXME\:\|NOTE\:<cr
 " yankring
 let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :<C-u>Unite history/yank<cr>
@@ -359,7 +368,7 @@ let g:seek_enable_jumps = 1
 let g:seek_enable_jumps_in_diff = 1
 
 "virtualenv
-command -nargs=1 Workon :VirtualEnvActivate <args>
+command! -nargs=1 Workon :VirtualEnvActivate <args>
 
 " Jedi
 let g:jedi#goto_assignments_command = ""
