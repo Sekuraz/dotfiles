@@ -24,7 +24,7 @@ set backspace=indent,eol,start
 " single settings
 set hidden " change buffers without saving
 set mousehide " no mouse
-set mouse=a " enable scrolling
+"set mouse=a " enable scrolling
 set wildmenu " menu when tab completing commands
 set nostartofline " don't move the coursor to the beginning of the line
 set foldmethod=syntax " fold by marker
