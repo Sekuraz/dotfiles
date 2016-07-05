@@ -1,10 +1,9 @@
 #!/bin/bash
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
-pwd
+dir=`pwd`
+echo $dir
 
-find | egrep -v -e '(\.git($|\/.*)|^./setup$)' | cpio -pdv ~
+find -type f -print0 | egrep -Z -v -e '(\.git($|\/.*)|^./setup$|host_specific)' | xargs -0 -n1 -i ln -snf $dir/{} ~/{}
 
-if [ ! -d ~/.backup ] ; then
-    mkdir ~/.backup;
-fi
+mkdir -p ~/.backup
