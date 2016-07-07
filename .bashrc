@@ -91,6 +91,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias l.='ls -al'
 
+alias rm='rm -I'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
