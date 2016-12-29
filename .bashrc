@@ -151,27 +151,6 @@ if [ $( command -v docker) ]; then
     alias bot='docker run -it -v /home/markus/Code/EarthLost:/EarthLost -w /EarthLost --rm --net="host" --user="$( id -u $USER ):$( id -g $USER )" --env="HOME=/EarthLost/docker/dockerhome" sekuraz/earthlost ipython'
 fi
 
-if [[ $(hostname -f) == *"informatik"* ]]; then
-    function compile {
-        current_dir=$(pwd)
-
-        cd ~/Code/SGpp
-        scons -j $(nproc) USE_OCL=1 SG_ALL=0 SG_BASE=1 SG_DATADRIVEN=1 SG_PDE=1 SG_SOLVER=1 SG_PYTHON=0 SG_JAVA=0 \
-                PRINT_INSTRUCTIONS=0 RUN_BOOST_TESTS=0 RUN_BOOST_PERFORMANCE_TESTS=0 DOC=0 PYDOC=0 RUN_PYTHON_TESTS=0 RUN_CPPLINT=0 "$@"
-
-        cd $current_dir
-    }
-
-    if [ -f /usr/local.nfs/Modules/init/`basename $SHELL` ]; then
-        source /usr/local.nfs/Modules/init/`basename $SHELL`
-        if [ -f /usr/local.nfs/Modules/modulefiles/jdk-1.8-x64 ]; then
-            module load jdk-1.8-x64
-        fi
-        if [ -d /usr/local.nfs/sgs/modulefiles ]; then
-            module use --append /usr/local.nfs/sgs/modulefiles
-        fi
-    fi
-
-    export LD_LIBRARY_PATH=/home/baurms/Code/SGpp/lib/sgpp:$LD_LIBRARY_PATH
-    export PYTHONPATH=/home/baurms/Code/SGpp/lib:$PYTHONPATH
+if [ -f ~/.ansible_pass ]; then
+    export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_pass
 fi
