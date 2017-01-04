@@ -7,6 +7,6 @@ dir=`pwd`
 echo $dir
 
 find -type d -print0 | egrep -zZ -v -e '(\.git($|\/.*)|^./setup$|host_specific)' | xargs -0 -n1 -i mkdir -p ~/{}
-find -type f -print0 | egrep -zZ -v -e '(\.git($|\/.*)|^./setup$|host_specific)' | xargs -0 -n1 -i ln -snf $dir/{} ~/{}
+find -type f -print0 | egrep -zZ -v -e '(\.git($|\/.*)|^./setup$|host_specific)' | xargs -0 -n1 -i ln -nf $dir/{} ~/{}
 
 mkdir -p ~/.backup
