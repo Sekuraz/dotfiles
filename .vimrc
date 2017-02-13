@@ -296,9 +296,7 @@ NeoBundle 'yonchu/accelerated-smooth-scroll'
 NeoBundle 'thinca/vim-localrc'
 
 " syntax
-au BufRead,BufNewFile *.sls set filetype=sls
-NeoBundleLazy 'saltstack/salt-vim'
-au FileType sls NeoBundleSource salt-vim
+NeoBundle 'dag/vim-fish'
 
 call neobundle#end()
 NeoBundleCheck

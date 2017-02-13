@@ -1,22 +1,24 @@
 [user]
 	email = fixed-term.Markus.Baur3@de.bosch.com
 	name = Markus Baur
+[branch]
+    autoSetupRebase = always
 [color]
-        ui = auto
+    ui = auto
 [alias]
-        a = add
-        p = pull --ff-only
-        s = status -sb
-        sup = log --all --graph --pretty=format:'%Cblue%h%C(yellow)%d %Creset%s %Cgreen(%cr) %Cred%an%+b'
-        whats = show --color-words
-        amend = commit --amend -c HEAD --reset-author
-        staged = diff --cached
-        co = checkout
+    a = add
+    p = pull --ff-only
+    s = status -sb
+    sup = log --all --graph --pretty=format:'%Cblue%h%C(yellow)%d %Creset%s %Cgreen(%cr) %Cred%an%+b'
+    whats = show --color-words
+    amend = commit --amend -c HEAD --reset-author
+    staged = diff --cached
+    co = checkout
 [push]
-        default = current
+    default = current
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [core]
-	editor = vim
+    editor = vim
