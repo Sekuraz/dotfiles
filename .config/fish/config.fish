@@ -18,7 +18,21 @@ if python -m virtualfish compat_aliases 1>/dev/null 2>/dev/null
 end
 
 if command -v screen >/dev/null ; and not hostname -f | grep login >/dev/null; and set -q SSH_TTY
-    set -l screenlist (screen -ls | grep 'Attached')
-    and echo -e "Screen is already running and attached:\n $screenlist"
-    or screen -U -R
+    set -l ppid (string trim (ps --pid %self -o ppid=))
+    while true
+        if test $ppid = '1'
+            set -l screenlist (screen -ls | grep 'Attached')
+            and echo -e "Screen is already running and attached:\n $screenlist"
+            or screen -U -R
+            break
+        end
+
+        if test (ps --pid $ppid -o cmd=) = 'SCREEN -U -R'
+            break
+        end
+
+        set -l ppid (string trim (ps --pid $ppid -o ppid=))
+    end
+
+    set -e ppid
 end
