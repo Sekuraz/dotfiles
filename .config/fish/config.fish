@@ -13,10 +13,14 @@ set -g __fish_git_prompt_show_informative_status 'yes'
 set -g fish_prompt_pwd_dir_length 0
 
 # import virtualenvwrapper functions
-if python -m virtualfish compat_aliases 1>/dev/null 2>/dev/null
-    eval (python -m virtualfish compat_aliases)
-end
+command -v python >/dev/null
+and python -m virtualfish compat_aliases >/dev/null ^/dev/null
+and eval (python -m virtualfish compat_aliases)
 
+# start ssh-agent if there is none
+ssh-agent >/dev/null
+
+# attach to screen or start a new one
 if command -v screen >/dev/null ; and not hostname -f | grep login >/dev/null; and set -q SSH_TTY
     set -l ppid (string trim (ps --pid %self -o ppid=))
     while true
@@ -27,7 +31,7 @@ if command -v screen >/dev/null ; and not hostname -f | grep login >/dev/null; a
             break
         end
 
-        if test (ps --pid $ppid -o cmd=) = 'SCREEN -U -R'
+        if string match -q -e 'SCREEN' (ps --pid $ppid -o cmd=)
             break
         end
 
