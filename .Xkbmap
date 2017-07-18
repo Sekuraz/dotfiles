@@ -1,0 +1,10 @@
+-layout us
+-variant altgr-intl
+
+! if gnome-settings-daemon is installed execute :
+! gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+altgr-intl')]"
+! gsettings set org.gnome.desktop.input-sources xkb-options "['lv3:caps_switch', 'terminate:ctrl_alt_bksp']"
+
+-option
+-option lv3:caps_switch
+-option terminate:ctrl_alt_bksp
