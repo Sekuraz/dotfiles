@@ -142,6 +142,9 @@ fi
 # reattach to screen or start one if you connect via ssh
 if [ $( command -v screen ) ] && [[ $(hostname) != *"login"* ]]; then
     if [ $SSH_TTY ] && [ ! $WINDOW ]; then
+        if test "$SSH_AUTH_SOCK" ; then
+            ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+        fi
         SCREENLIST=`screen -ls | grep 'Attached'`
         if [ $? -eq "0" ]; then
             echo -e "Screen is already running and attached:\n ${SCREENLIST}"

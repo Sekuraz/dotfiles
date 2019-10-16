@@ -23,4 +23,6 @@ defhstatus "screen ^E (^Et) | $USER@^EH"
 
 altscreen on
 
+setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
+
 #term xterm-256color
