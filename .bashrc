@@ -2,6 +2,12 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
+if [ -d "/usr/lib/ccache/bin/" ]; then
+    export PATH="/usr/lib/ccache/bin/:$PATH"
+fi
+
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
