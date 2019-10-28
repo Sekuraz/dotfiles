@@ -14,6 +14,13 @@ case $- in
       *) return;;
 esac
 
+
+if ! ip r s | grep -q "default via 172.29.212.240"; then
+    echo "Sudo for route"
+    sudo ip r d default
+    sudo ip r a default via 172.29.212.240
+fi
+
 if [ $( command -v fish ) ]; then
     exec $( which fish )
 fi
