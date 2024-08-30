@@ -1,5 +1,5 @@
 [user]
-    email = markusb@selfnet.de
+    email = markus.baur95@gmail.com
     name = Markus Baur
 [branch]
     autoSetupRebase = always
@@ -16,6 +16,7 @@
     co = checkout
 [push]
     default = current
+    autoSetupRemote = true
 [diff]
     tool = vimdiff
 [merge]
