@@ -1,12 +1,8 @@
 #!/bin/bash
 
-set -x
-
 cd "$( dirname "${BASH_SOURCE[0]}" )"
-dir=`pwd`
-echo $dir
 
-find -type d -print0 | egrep -zZ -v -e '(\.git($|\/.*)|^./setup$|host_specific)' | xargs -0 -n1 -i mkdir -p ~/{}
-find -type f -print0 | egrep -zZ -v -e '(\.git($|\/.*)|^./setup$|host_specific)' | xargs -0 -n1 -i ln -nf $dir/{} ~/{}
+find -type d -print0 | grep -E -zZ -v -e '(\.git($|/.*)|^./setup$|host_specific)' | xargs -0 -i mkdir -p ~/{}
+find -type f -print0 | grep -E -zZ -v -e '(\.git($|/.*)|^./setup$|host_specific)' | xargs -0 -i ln -sf $PWD/{} ~/{}
 
 mkdir -p ~/.backup
