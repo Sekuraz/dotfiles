@@ -23,3 +23,12 @@
     tool = vimdiff
 [core]
     editor = vim
+[bash]
+	showUntrackedFiles = true
+	showInformativeStatus = true
+
+[includeIf "hasconfig:remote.*.url:**symovo**"]
+	path = ~/dotfiles/static/git/croz.gitconfig
+
+[includeIf "hasconfig:remote.*.url:**croz**"]
+	path = ~/dotfiles/static/git/croz.gitconfig

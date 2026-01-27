@@ -2,7 +2,7 @@
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-find -type d -print0 | grep -E -zZ -v -e '(\.git($|/.*)|^./setup$|host_specific)' | xargs -0 -i mkdir -p ~/{}
-find -type f -print0 | grep -E -zZ -v -e '(\.git($|/.*)|^./setup$|host_specific)' | xargs -0 -i ln -sf $PWD/{} ~/{}
+find -type d -print0 | grep -E -zZ -v -e '(\.git($|/.*)|^./setup$|static|host_specific)' | xargs -0 -i mkdir -p ~/{}
+find -type f -print0 | grep -E -zZ -v -e '(\.git($|/.*)|^./setup$|static|host_specific)' | xargs -0 -i ln -sf $PWD/{} ~/{}
 
 mkdir -p ~/.backup

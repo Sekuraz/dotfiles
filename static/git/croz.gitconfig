@@ -1,0 +1,4 @@
+# vim: ft=gitconfig
+
+[user]
+    email = mbaur@croz.net
