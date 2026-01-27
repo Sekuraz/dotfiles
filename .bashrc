@@ -142,31 +142,6 @@ if [ -f /usr/bin/virtualenvwrapper.sh ]; then
     source /usr/bin/virtualenvwrapper.sh
 fi
 
-# reattach to screen or start one if you connect via ssh
-if [ $( command -v screen ) ] && [[ $(hostname) != *"login"* ]]; then
-    if [ $SSH_TTY ] && [ ! $WINDOW ]; then
-        if test "$SSH_AUTH_SOCK" ; then
-            ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
-        fi
-        SCREENLIST=`screen -ls | grep 'Attached'`
-        if [ $? -eq "0" ]; then
-            echo -e "Screen is already running and attached:\n ${SCREENLIST}"
-        else
-            # screen -X setenv DISPLAY $DISPLAY
-            screen -U -R
-        fi
-    fi
-fi
-
-# update and commit for svn
-if [ $( command -v svn) ]; then
-    alias svnci='svn up && svn ci'
-fi
-
-if [ $( command -v docker) ]; then
-    alias bot='docker run -it -v /home/markus/Code/EarthLost:/EarthLost -w /EarthLost --rm --net="host" --user="$( id -u $USER ):$( id -g $USER )" --env="HOME=/EarthLost/docker/dockerhome" sekuraz/earthlost ipython'
-fi
-
 if [ -f ~/.ansible_pass ]; then
     export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_pass
 fi
