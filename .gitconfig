@@ -27,8 +27,11 @@
 	showUntrackedFiles = true
 	showInformativeStatus = true
 
-[includeIf "hasconfig:remote.*.url:**symovo**"]
+[includeIf "gitdir:/Users/"]
 	path = ~/dotfiles/static/git/croz.gitconfig
 
-[includeIf "hasconfig:remote.*.url:**croz**"]
-	path = ~/dotfiles/static/git/croz.gitconfig
+[includeIf "gitdir:~/Code/symovo/"]
+	path = ~/dotfiles/static/git/symovo.gitconfig
+
+[includeIf "gitdir:~/Code/homelab/"]
+	path = ~/dotfiles/static/git/private.gitconfig
